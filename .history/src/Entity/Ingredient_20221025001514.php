@@ -34,7 +34,6 @@ class Ingredient
     /**
      * Constructor
      */
-    
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();

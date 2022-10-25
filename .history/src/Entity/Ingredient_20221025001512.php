@@ -31,10 +31,9 @@ class Ingredient
     #[Assert\NotNull()]
     private ?\DateTimeImmutable $createdAt = null;
 
-    /**
-     * Constructor
-     */
-    
+/**
+ * Constructor
+ */
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
