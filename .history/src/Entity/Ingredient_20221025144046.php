@@ -29,7 +29,7 @@ class Ingredient
 
     #[ORM\Column]
     #[Assert\NotNull()]
-    private ?DateTimeImmutable $createdAt = null;
+    private ?\DateTimeImmutable $createdAt = null;
 
     /**
      * Constructor

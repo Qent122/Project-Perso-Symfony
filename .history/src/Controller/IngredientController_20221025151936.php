@@ -5,7 +5,8 @@ namespace App\Controller;
 use App\Entity\Ingredient;
 use App\Form\IngredientType;
 use App\Repository\IngredientRepository;
-use Knp\Component\Pager\PaginatorInterface;
+// use Knp\Component\Pager\PaginatorInterface;
+use App\Controller\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +27,7 @@ class IngredientController extends AbstractController
      */
 
     #[Route('/ingredient', name: 'app_ingredient')]
-    public function index(IngredientRepository $repository, PaginatorInterface $paginator, Request $request): Response
+    public function index(IngredientRepository $repository, App\Controller\PaginatorInterface $paginator, Request $request): Response
     {
 
 
