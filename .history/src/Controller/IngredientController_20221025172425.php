@@ -40,23 +40,16 @@ class IngredientController extends AbstractController
             'ingredients' => $ingredients
         ]);
     }
-    #[Route('ingredient/new', "ingredient.new", methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $manager): Response
+    #[Route('ingredient/nouveau', "ingredient.new", methods: ['GET', 'POST'])]
+    public function new(Request $request,EntityManagerInterface $manager): Response
     {
         $ingredient = new ingredient();
         $form = $this->createForm(IngredientType::class, $ingredient);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $ingredient = $form->getData();
-
-            $manager->persist($ingredient);
-            $manager->flush();
-
-            $this->addFlash(
-                'success',
-                'Votre ingrédient a été créer avec succès !'
-            );
+            $ingredient= $form->getData();
+            dd($ingredient);
         }
 
         return $this->render('pages/ingredient/new.html.twig', [

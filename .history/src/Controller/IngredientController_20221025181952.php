@@ -40,7 +40,7 @@ class IngredientController extends AbstractController
             'ingredients' => $ingredients
         ]);
     }
-    #[Route('ingredient/new', "ingredient.new", methods: ['GET', 'POST'])]
+    #[Route('ingredient/new', "ingredient.new", methods: ['GET','POST'])]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $ingredient = new ingredient();
@@ -48,8 +48,8 @@ class IngredientController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $ingredient = $form->getData();
-
+            $ingredient= $form->getData();
+            
             $manager->persist($ingredient);
             $manager->flush();
 
