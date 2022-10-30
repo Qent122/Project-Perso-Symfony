@@ -79,7 +79,7 @@ class IngredientController extends AbstractController
     }
 
 /**
- * This controller allows to modfy an ingredient
+ * This controller allows to modify an ingredient
  * 
  * 
  * @param Ingredient $ingredient
@@ -87,7 +87,6 @@ class IngredientController extends AbstractController
  * @param EntityManagerInterface $manager
  * 
  */
-
     #[Route('/ingredient/edit/{id}', 'ingredient.edit', methods: ['GET', 'POST'])]
     public function edit(Ingredient $ingredient, Request $request, EntityManagerInterface $manager): Response
     {
