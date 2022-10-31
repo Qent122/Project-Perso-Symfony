@@ -10,8 +10,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 use Symfony\component\Validator\Constraints as Assert;
 
-
+#[UniqueEntity('email')]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\EntityListeners(['App\EntityListener\UserListener'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -20,33 +21,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $fullName = null;
 
     #[ORM\Column(length: 50, nullable: true)]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $pseudo = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email()]
+    #[Assert\Length(min: 2, max: 180)]
     private ?string $email = null;
 
     #[ORM\Column]
+    #[Assert\NotNull()]
     private array $roles = [];
 
-    #[ORM\Column]
-    private ?string $plainPassword;
+
+    private ?string $plainPassword = null;
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank()]
     private ?string $password = null;
 
     #[ORM\Column]
+    #[Assert\NotNull()]
     private ?\DateTimeImmutable $createdAt = null;
 
-public function __construct()
-{
-    $this->createdAt= new \DateTimeImmutable;
-} 
+
+
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable;
+    }
 
     public function getId(): ?int
     {
@@ -154,7 +166,7 @@ public function __construct()
         // $this->plainPassword = null;
     }
 
-    
+
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
